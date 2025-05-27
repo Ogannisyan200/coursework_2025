@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Вакансия</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+    
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 th:text="${vacancy.title}"></h2>
+                    <div>
+                        <div sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{/applications/vacancy/{id}(id=${vacancy.id})}" class="btn btn-info me-2">Отклики</a>
+                            <a th:href="@{/vacancies/{id}/edit(id=${vacancy.id})}" class="btn btn-warning me-2">Редактировать</a>
+                            <form th:action="@{/vacancies/{id}/delete(id=${vacancy.id})}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены?')">Удалить</button>
+                            </form>
+                        </div>
+                        <div sec:authorize="!hasRole('ADMIN')">
+                            <form th:action="@{/applications/vacancy/{id}(id=${vacancy.id})}" method="post" style="display: inline;">
+                                <button type="submit" 
+                                        class="btn" 
+                                        th:classappend="${hasApplied ? 'btn-secondary' : 'btn-primary'}"
+                                        th:disabled="${hasApplied}"
+                                        th:text="${hasApplied ? 'Вы уже откликнулись' : 'Откликнуться'}">
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Компания</h5>
+                        <p th:text="${vacancy.company}"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Локация</h5>
+                        <p th:text="${vacancy.location}"></p>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Зарплата</h5>
+                        <p th:text="${vacancy.salary + ' ₽'}"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Дата публикации</h5>
+                        <p th:text="${#temporals.format(vacancy.createdAt, 'dd.MM.yyyy HH:mm')}"></p>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>Описание</h5>
+                    <p th:text="${vacancy.description}"></p>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a th:href="@{/vacancies}" class="btn btn-secondary">Назад к списку</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/base :: head('Registration')}">
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        .card {
+            background-color: #212529;
+            color: #fff;
+            border: none;
+        }
+        
+        .card-header {
+            background-color: #343a40;
+            border-bottom: 1px solid #495057;
+        }
+        
+        .card-footer {
+            background-color: #343a40;
+            border-top: 1px solid #495057;
+        }
+        
+        .form-control {
+            background-color: #343a40;
+            border: 1px solid #495057;
+            color: #fff;
+        }
+        
+        .form-control:focus {
+            background-color: #343a40;
+            border-color: #0d6efd;
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .form-control::placeholder {
+            color: #adb5bd;
+        }
+        
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+        
+        .alert {
+            background-color: #343a40;
+            border-color: #495057;
+            color: #fff;
+        }
+        
+        .alert-success {
+            background-color: #198754;
+            border-color: #198754;
+        }
+        
+        .alert-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .invalid-feedback {
+            color: #dc3545;
+        }
+        
+        a {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: #0a58ca;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card registration-card">
+                    <div class="card-header">
+                        <h2 class="text-center">Регистрация</h2>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${param.success}" class="alert alert-success">
+                            Регистрация прошла успешно! Теперь вы можете <a th:href="@{/login}">войти</a>.
+                        </div>
+                        <form th:action="@{/registration}" method="post" th:object="${user}">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Имя пользователя</label>
+                                <input type="text" id="username" th:field="*{username}" class="form-control"
+                                       th:classappend="${usernameError != null} ? 'is-invalid' : ''" required>
+                                <div th:if="${usernameError}" class="invalid-feedback" th:text="${usernameError}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" th:field="*{email}" class="form-control"
+                                       th:classappend="${emailError != null} ? 'is-invalid' : ''" required>
+                                <div th:if="${emailError}" class="invalid-feedback" th:text="${emailError}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label">Имя и фамилия</label>
+                                <input type="text" id="fullName" th:field="*{fullName}" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" id="password" th:field="*{password}" class="form-control" required>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div>Уже есть аккаунт? <a th:href="@{/login}">Войти здесь</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

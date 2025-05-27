@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/base :: head('Главная')}">
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .card {
+            background-color: #212529;
+            color: #fff;
+            border: none;
+        }
+        
+        .card-header {
+            background-color: #343a40;
+            border-bottom: 1px solid #495057;
+        }
+        
+        .btn-custom {
+            background-color: #FF8C00;
+            color: #fff;
+            border: 2px solid #FF8C00;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            background-color: #FFA500;
+            border-color: #FFA500;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .statistics-card {
+            margin-top: 2rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Добро пожаловать</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center">
+                            Добро пожаловать в систему управления вакансиями. Здесь вы можете найти работу или разместить вакансию.
+                        </p>
+                        <div class="d-grid gap-2" sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/vacancies/list}" class="btn btn-custom">Просмотр вакансий</a>
+                            <a th:href="@{/resume/form}" class="btn btn-custom">Создать резюме</a>
+                            <a th:href="@{/about}" class="btn btn-custom">О нас</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Section -->
+                <div class="card statistics-card" sec:authorize="hasRole('ADMIN')">
+                    <div class="card-header">
+                        <h3 class="text-center">Статистика откликов на вакансии</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="applicationsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        // Get the statistics data from the server
+        const statistics = /*[[${statistics}]]*/ {};
+        
+        if (statistics && statistics.vacancies && statistics.applications) {
+            const ctx = document.getElementById('applicationsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: statistics.vacancies,
+                    datasets: [{
+                        label: 'Количество откликов',
+                        data: statistics.applications,
+                        backgroundColor: '#FF8C00',
+                        borderColor: '#FFA500',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

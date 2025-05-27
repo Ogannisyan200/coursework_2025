@@ -1,0 +1,330 @@
+html, body {
+    background-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.navbar.navbar-dark.bg-dark {
+    background-color: #FF8C00 !important;
+    border-bottom: 2px solid #FFA500 !important;
+}
+
+/* Стили для навигации */
+.navbar-dark .navbar-brand,
+.navbar-dark .nav-link,
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link a,
+.navbar-dark .navbar-nav .nav-link button {
+    color: #ffffff !important;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+    background-color: #FFA500 !important;
+}
+
+/* Стили для кнопок в карточках авторизации/регистрации */
+.card.login-card .btn,
+.card.registration-card .btn {
+    background-color: #FF8C00 !important;
+    color: #ffffff !important;
+    border: 2px solid #FF8C00 !important;
+}
+
+.card.login-card .btn:hover,
+.card.registration-card .btn:hover {
+    background-color: #FFA500 !important;
+    color: #ffffff !important;
+    border: 2px solid #FFA500 !important;
+}
+
+/* Стили для обычных кнопок */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-light,
+.btn-dark,
+.btn-primary.btn-sm,
+.btn-secondary.btn-sm,
+.btn-light.btn-sm,
+.btn-dark.btn-sm {
+    background-color: #FF8C00 !important;
+    color: #ffffff !important;
+    border: 2px solid #FF8C00 !important;
+}
+
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-light:hover,
+.btn-dark:hover,
+.btn-primary.btn-sm:hover,
+.btn-secondary.btn-sm:hover,
+.btn-light.btn-sm:hover,
+.btn-dark.btn-sm:hover {
+    background-color: #FFA500 !important;
+    color: #ffffff !important;
+    border: 2px solid #FFA500 !important;
+}
+
+/* Сохраняем специальные цвета для системных кнопок */
+.btn-success,
+.btn-success.btn-sm {
+    background-color: #198754 !important;
+    color: #ffffff !important;
+    border: 2px solid #198754 !important;
+}
+
+.btn-success:hover,
+.btn-success.btn-sm:hover {
+    background-color: #157347 !important;
+    color: #ffffff !important;
+    border: 2px solid #157347 !important;
+}
+
+.btn-danger,
+.btn-danger.btn-sm {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border: 2px solid #dc3545 !important;
+}
+
+.btn-danger:hover,
+.btn-danger.btn-sm:hover {
+    background-color: #bb2d3b !important;
+    color: #ffffff !important;
+    border: 2px solid #bb2d3b !important;
+}
+
+.btn-warning,
+.btn-warning.btn-sm {
+    background-color: #FF8C00 !important;
+    color: #ffffff !important;
+    border: 2px solid #FF8C00 !important;
+}
+
+.btn-warning:hover,
+.btn-warning.btn-sm:hover {
+    background-color: #FFA500 !important;
+    color: #ffffff !important;
+    border: 2px solid #FFA500 !important;
+}
+
+.btn-info,
+.btn-info.btn-sm {
+    background-color: #FF8C00 !important;
+    color: #ffffff !important;
+    border: 2px solid #FF8C00 !important;
+}
+
+.btn-info:hover,
+.btn-info.btn-sm:hover {
+    background-color: #FFA500 !important;
+    color: #ffffff !important;
+    border: 2px solid #FFA500 !important;
+}
+
+/* Стили для маленьких кнопок */
+.btn-sm {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.2rem !important;
+}
+
+.btn-link {
+    color: #000000 !important;
+    text-decoration: none !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 0.25rem !important;
+}
+
+.btn-link:hover {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+    text-decoration: none !important;
+}
+
+/* Стили для карточек */
+.card {
+    background-color: #000000 !important;
+    border: 2px solid #000000 !important;
+    color: #ffffff !important;
+}
+
+.card-header,
+.card-body,
+.card-footer {
+    background-color: #000000 !important;
+    border: 2px solid #000000 !important;
+    color: #ffffff !important;
+}
+
+.form-control {
+    background-color: #ffffff !important;
+    border: 2px solid #000000 !important;
+    color: #000000 !important;
+}
+
+.form-control:focus {
+    background-color: #ffffff !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Стили для полей ввода в карточках */
+.card .form-control {
+    background-color: #ffffff !important;
+    border: 2px solid #000000 !important;
+    color: #000000 !important;
+}
+
+.card .form-control:focus {
+    background-color: #ffffff !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Custom styles */
+:root {
+    --primary-color: #ff6b00;
+    --primary-hover: #e05a00;
+    --text-color: #333;
+}
+
+/* Table styles */
+.table {
+    color: var(--text-color);
+}
+
+.table td, .table th {
+    color: var(--text-color);
+}
+
+.table-hover tbody tr:hover td {
+    color: var(--text-color);
+}
+
+a {
+    color: #ffffff !important;
+}
+
+a:hover {
+    color: #000000 !important;
+}
+
+.alert {
+    background-color: #000000 !important;
+    border: 2px solid #000000 !important;
+    color: #ffffff !important;
+}
+
+.alert-danger {
+    border-color: #000000 !important;
+}
+
+.alert-success {
+    border-color: #000000 !important;
+}
+
+/* Стили для меток форм */
+.form-label {
+    color: #ffffff !important;
+}
+
+/* Стили для текста в карточках */
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6,
+.card p,
+.card div {
+    color: #ffffff !important;
+}
+
+/* Стили для таблиц в карточках */
+.card .table {
+    color: #ffffff !important;
+}
+
+.card .table thead th {
+    border-bottom: 3px solid #000000 !important;
+}
+
+.card .table td, 
+.card .table th {
+    border-top: 2px solid #000000 !important;
+}
+
+/* Стили для карточки регистрации */
+.card.registration-card {
+    background-color: #000000 !important;
+    border: 2px solid #000000 !important;
+    color: #ffffff !important;
+}
+
+.card.registration-card .card-header,
+.card.registration-card .card-body,
+.card.registration-card .card-footer {
+    background-color: #000000 !important;
+    border: 2px solid #000000 !important;
+    color: #ffffff !important;
+}
+
+.card.registration-card .form-label {
+    color: #ffffff !important;
+}
+
+.card.registration-card .form-control {
+    background-color: #ffffff !important;
+    border: 2px solid #000000 !important;
+    color: #000000 !important;
+}
+
+.card.registration-card .form-control:focus {
+    background-color: #ffffff !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25) !important;
+}
+
+.card.registration-card .btn-primary {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.card.registration-card .btn-primary:hover {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.card.registration-card a {
+    color: #ffffff !important;
+}
+
+.card.registration-card a:hover {
+    color: #cccccc !important;
+    text-decoration: underline !important;
+}
+
+/* Стили для кнопки выхода */
+.nav-item form button {
+    background-color: #FF8C00 !important;
+    color: #ffffff !important;
+    border: 2px solid #FF8C00 !important;
+}
+
+.nav-item form button:hover {
+    background-color: #FFA500 !important;
+    color: #ffffff !important;
+    border: 2px solid #FFA500 !important;
+} 

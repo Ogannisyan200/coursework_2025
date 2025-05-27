@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Отклик на вакансию</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+    
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Отклик на вакансию: <span th:text="${app.vacancy.title}"></span></h2>
+            </div>
+            <div class="card-body">
+                <div th:if="${param.accepted}" class="alert alert-success">
+                    Отклик принят!
+                </div>
+                <div th:if="${param.rejected}" class="alert alert-danger">
+                    Отклик отклонен!
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Соискатель</h5>
+                        <p th:text="${app.user.fullName}"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Дата отклика</h5>
+                        <p th:text="${#temporals.format(app.appliedAt, 'dd.MM.yyyy HH:mm')}"></p>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>Статус отклика</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <span th:if="${app.status == T(net.recagency.model.VacancyApplication.ApplicationStatus).PENDING}"
+                                  class="badge bg-warning">На рассмотрении</span>
+                            <span th:if="${app.status == T(net.recagency.model.VacancyApplication.ApplicationStatus).ACCEPTED}"
+                                  class="badge bg-success">Принят</span>
+                            <span th:if="${app.status == T(net.recagency.model.VacancyApplication.ApplicationStatus).REJECTED}"
+                                  class="badge bg-danger">Отклонен</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>Резюме соискателя</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <p th:if="${app.user.resume != null}" th:text="${app.user.resume.content}"></p>
+                            <p th:unless="${app.user.resume != null}" class="text-muted">Резюме не предоставлено</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <div sec:authorize="hasRole('ADMIN')" th:if="${app.status == T(net.recagency.model.VacancyApplication.ApplicationStatus).PENDING}">
+                        <form th:action="@{/applications/{id}/accept(id=${app.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-success me-2">Принять отклик</button>
+                        </form>
+                        <form th:action="@{/applications/{id}/reject(id=${app.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-danger me-2">Отклонить отклик</button>
+                        </form>
+                    </div>
+                    <a th:href="@{/applications/vacancy/{id}(id=${app.vacancy.id})}" class="btn btn-secondary">Назад к списку откликов</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
