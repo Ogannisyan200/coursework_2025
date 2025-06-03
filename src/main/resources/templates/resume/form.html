@@ -18,6 +18,8 @@
                     Резюме успешно сохранено!
                 </div>
                 
+                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                
                 <form th:action="@{/resume}" method="post" th:object="${resume}">
                     <div class="mb-3">
                         <label for="content" class="form-label">Содержание резюме</label>

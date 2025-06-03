@@ -21,7 +21,7 @@ public class Resume {
     private LocalDateTime updatedAt = LocalDateTime.now();
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
     
     public Resume() {

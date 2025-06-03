@@ -43,7 +43,7 @@ public class DataInitializer implements CommandLineRunner {
             
             User admin = userService.save(adminDto);
             admin.addRole(adminRole);
-            userService.save(adminDto);
+            userService.saveUser(admin);  // Save the updated user with the admin role
         }
     }
 } 

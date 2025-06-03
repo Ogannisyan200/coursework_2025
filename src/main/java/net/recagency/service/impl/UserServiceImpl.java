@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.recagency.dto.UserRegistrationDto;
+import net.recagency.model.Role;
 import net.recagency.model.User;
+import net.recagency.repository.RoleRepository;
 import net.recagency.repository.UserRepository;
 import net.recagency.service.UserService;
 
@@ -23,18 +25,44 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Override
     public long count() {
         return userRepository.count();
     }
 
     @Override
+    @Transactional
     public User save(UserRegistrationDto registrationDto) {
+        if (userRepository.existsByUsername(registrationDto.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
+        if (userRepository.existsByEmail(registrationDto.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        }
+
         User user = new User();
         user.setUsername(registrationDto.getUsername());
         user.setEmail(registrationDto.getEmail());
-        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
         user.setFullName(registrationDto.getFullName());
+        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+        
+        // Add ROLE_USER role to new user
+        Role userRole = roleRepository.findByName("ROLE_USER");
+        if (userRole == null) {
+            userRole = new Role("ROLE_USER");
+            roleRepository.save(userRole);
+        }
+        user.addRole(userRole);
+        
+        return userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
@@ -67,7 +95,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("User not found");
         }
         return user;
     }

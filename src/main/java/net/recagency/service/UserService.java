@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserService extends UserDetailsService {
     long count();
     User save(UserRegistrationDto registrationDto);
+    User saveUser(User user);
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
     User findByUsername(String username);
